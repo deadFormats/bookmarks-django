@@ -31,12 +31,14 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'account.apps.AccountConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -81,6 +83,9 @@ DATABASES = {
 }
 
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
@@ -99,7 +104,14 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+LOGIN_REDIRECT_URL = 'dashboard'
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'account.authentication.EmailAuthBackend',
+]
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
@@ -116,6 +128,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
