@@ -1,7 +1,8 @@
 */__pycache__/*
 
 venv/
-
+*.key
+*.crt
 
 db*
 
